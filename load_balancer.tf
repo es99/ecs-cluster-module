@@ -29,3 +29,20 @@ resource "aws_security_group_rule" "ingress_443" {
   security_group_id = aws_security_group.lb.id
   type              = "ingress"
 }
+
+resource "aws_lb" "main" {
+  name               = format("%s-lb", var.project_name)
+  internal           = var.load_balancer_internal
+  load_balancer_type = var.load_balancer_type
+
+  security_groups = [aws_security_group.lb.id]
+
+  subnets = [
+    data.aws_ssm_parameter.public_subnet_2a.value,
+    data.aws_ssm_parameter.public_subnet_2b.value,
+    data.aws_ssm_parameter.public_subnet_2c.value
+  ]
+
+  enable_cross_zone_load_balancing = false
+  enable_deletion_protection       = false
+}
