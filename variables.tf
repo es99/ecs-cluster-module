@@ -1,8 +1,12 @@
+##### General Variables #####
+
 variable "project_name" {
   type        = string
   default     = "linuxtips-ecs-cluster"
   description = "Variable for identify the actual project"
 }
+
+##### SSM Variables #####
 
 variable "ssm_vpc_id" {
   type = string
@@ -31,3 +35,9 @@ variable "ssm-private-subnet-2b" {
 variable "ssm-private-subnet-2c" {
   type = string
 }
+
+##### Balancer #####
+
+variable "load_balancer_internal" {}
+
+variable "load_balancer_type" {}
