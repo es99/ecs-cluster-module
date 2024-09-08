@@ -46,3 +46,19 @@ resource "aws_lb" "main" {
   enable_cross_zone_load_balancing = false
   enable_deletion_protection       = false
 }
+
+resource "aws_lb_listener" "main" {
+  load_balancer_arn = aws_security_group.lb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "text/plain"
+      message_body = "Linuxtips"
+      status_code  = "200"
+    }
+  }
+}
