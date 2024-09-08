@@ -5,7 +5,7 @@ resource "aws_ssm_parameter" "lb_arn" {
 }
 
 resource "aws_ssm_parameter" "lb_listener_arn" {
-  name  = format("/%s/ecs/lb_listener/arn")
+  name  = format("/%s/ecs/lb_listener/arn", var.project_name)
   type  = "String"
   value = aws_lb_listener.main.arn
 }
